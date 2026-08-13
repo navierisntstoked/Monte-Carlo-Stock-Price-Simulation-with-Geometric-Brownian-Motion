@@ -114,9 +114,51 @@ The simulation outputs represent conditional scenarios under the selected GBM pa
 
 ## Results
 
-![Terminal distribution](terminal_distribution.png)
+### Baseline Monte Carlo Simulation
+
+The 10,000 simulated price paths produced percentile bands that widened throughout the one-year horizon, reflecting the accumulation of uncertainty over time. The bands were asymmetric around the median because GBM produces a lognormal rather than normal price distribution.
+
+![GBM percentile bands](gbm_percentile_bands.png)
+
+For the baseline 20% volatility scenario, the simulated expected terminal price was USD 108.13, compared with the analytical GBM value of USD 108.33. This corresponds to a relative error of approximately 0.18%.
+
+The simulated and analytical terminal medians both equaled approximately USD 106.18. The close agreement between the simulated and analytical values supports the numerical accuracy of the Monte Carlo implementation.
+
+| Baseline metric                  | Simulated value | Analytical value |
+| -------------------------------- | --------------: | ---------------: |
+| Expected terminal price          |      USD 108.13 |       USD 108.33 |
+| Median terminal price            |      USD 106.18 |       USD 106.18 |
+| Relative error in expected price |           0.18% |                - |
+
+### Terminal-Price Distribution
+
+The simulated terminal prices formed a right-skewed distribution. The terminal mean was greater than the median because a relatively small number of high-price outcomes pulled the arithmetic average upward.
+
+![Terminal-price distribution](terminal_distribution.png)
+
+This difference between the mean and median is consistent with the lognormal terminal-price distribution predicted by GBM.
+
+### Volatility Sensitivity
+
+Increasing annual volatility substantially widened the distribution of possible terminal prices while leaving the expected terminal price approximately unchanged.
+
+| Annual volatility | Simulated mean | Analytical mean | Simulated median | Terminal standard deviation |
+| ----------------: | -------------: | --------------: | ---------------: | --------------------------: |
+|               10% |     USD 108.23 |      USD 108.33 |       USD 107.79 |                   USD 10.83 |
+|               20% |     USD 108.13 |      USD 108.33 |       USD 106.18 |                   USD 21.78 |
+|               30% |     USD 108.02 |      USD 108.33 |       USD 103.56 |                   USD 33.02 |
 
 ![Volatility sensitivity](volatility_sensitivity.png)
+
+As volatility increased from 10% to 30%:
+
+* The terminal standard deviation increased from USD 10.83 to USD 33.02.
+* The median terminal price decreased from USD 107.79 to USD 103.56.
+* The expected terminal price remained close to the analytical value of USD 108.33.
+* The difference between the mean and median became progressively larger.
+
+These results demonstrate that increasing volatility does not change the theoretical GBM expected terminal price when drift is held constant. Instead, it increases dispersion and right skew, creating a wider range of possible outcomes and a lower median terminal price.
+
 
 
 ## Conclusions and Limitations
