@@ -1,0 +1,2 @@
+# Monte-Carlo-Stock-Price-Simulation-with-Geometric-Brownian-Motion
+This project uses Monte Carlo simulation to generate possible future stock-price paths under geometric Brownian motion (GBM). The analysis examines how uncertainty develops over time, validates the simulated terminal distribution against analytical GBM results, and investigates how volatility changes the distribution of possible outcomes.
